@@ -1,4 +1,4 @@
-import urllib2,json, urllib, csv
+import urllib2,json, urllib, csv, math, fractions
 
 from xml.dom import minidom
 
@@ -22,7 +22,7 @@ def getallphotos(tag):
     print req.get_full_url()
 
     try:
-        conn = urllib2.urlopen(url, urllib.urlencode(data))
+        conn = urllib2.urlopen(url,` urllib.urlencode(data))
         try:
             response = conn.read()
         finally:
@@ -57,7 +57,7 @@ def getExifs(tag):
 
     json_stripped_data = json.loads(data)
 #    print(json_stripped_data['photos']['photo'])
-    i = 5 #NUM of results
+    i = 1000 #NUM of results
     new_response='{\"photos\":'
     while i > 0:
         for photo in json_stripped_data['photos']['photo']:
@@ -112,6 +112,9 @@ def getExifs(tag):
                         break
                 combined = idd +","+ISOvalue+","+Aperture+","+Exposure+","+photo_url
                 print combined
+                if "," in ISOvalue:
+                    ISOvalue = ISOvalue.split(",")[0]
+                    print "ISOValue after split : "+ISOvalue
                 with open('image_data.csv', 'a') as csvfile:
                     spamwriter = csv.writer(csvfile)
                     spamwriter.writerow((idd, ISOvalue, Aperture, Exposure, photo_url))
@@ -129,10 +132,49 @@ def getExifs(tag):
     new_outfile.close()
 
 def getSimilarPhotos(photoid, tag):
+    isoval = ''
+    aper = ''
+    expo = ''
     with open('image_data.csv', 'rb') as csvfile:
         spamreader = csv.reader(csvfile)
         for row in spamreader:
-             print ', '.join(row)
+            print ', '.join(row)
+            if row[0] == photoid:
+                isoval = row[1]
+                aper = row[2]
+                expo = row[3]
+                break
+        print isoval+","+aper+","+expo
+
+
+        for row1 in spamreader:
+            #print "aper : "+aper+" and row12 = "+row1[2]
+            gotit=''
+            if aper != '' and row1[2] != '' and row1[3]!= '' and expo!= '':
+                #print "ceil12="+str(math.ceil(float(row1[2])))+"ceilaper="+str(math.ceil(float(aper)))
+                row_expo = str(row1[3]).split("/")
+                row_expo_numer = int(row_expo[0])
+                row_expo_deno = int(row_expo[1])
+                row_expo_float = fractions.Fraction(row_expo_numer,row_expo_deno)
+
+                expo_1 = str(expo).split("/")
+                expo_numer = int(expo_1[0])
+                expo_deno = int(expo_1[1])
+                expo_float = fractions.Fraction(expo_numer,expo_deno)
+
+                if row1[1] == isoval and round(float(row1[2])) == round(float(aper)) and round(row_expo_float) == round(expo_float):
+                    print "----found matching : "+photoid+"="+row1[0]
+                    gotit = 'yes'
+            elif row1[1] == isoval and row1[2] == aper and row1[3] == expo:
+                print "----found matching : "+photoid+"="+row1[0]
+                gotit = 'yes'
+
+            if gotit == 'yes':
+                with open('matching_data.csv', 'a') as new_csvfile:
+                    imgwriter = csv.writer(new_csvfile)
+                    imgwriter.writerow((row1[0], row1[1], row1[2], row1[3], row1[4]))
+                new_csvfile.close()
+
 
 
 #def getSimilarPhotos(photoid, tag):
@@ -168,4 +210,4 @@ def getSimilarPhotos(photoid, tag):
 #CALLING HERE
 #getallphotos('golden gate')
 #getExifs('golden gate')
-getSimilarPhotos('10479694713','golden gate')
+getSimilarPhotos('10458677563','golden gate')
