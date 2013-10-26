@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GOOD MORNING!!!</title>
+    <title>PhotographeR</title>
+    <script type="text/javascript">
+        function setCurrentImage(imageId)
+        {
+             var currentImage = document.getElementById(imageId);
+            currentImage.style.borde
+            currentImage.style.borderColor="red"
+            alert(currentImage.style.borderColor)
+        }
+    </script>
 </head>
 <body>
-<h2>Norwegian Mountain Trip</h2>
+<h2 align="center">Search Results</h2>
 <!--<img border="0" src="http://upload.wikimedia.org/wikipedia/commons/e/e3/CentaureaCyanus-bloem-kl.jpg" alt="Pulpit rock" width="304" height="228">-->
-
-{% for row in rows %}
-    <img border="0" src={{ row.0 }} alt="Pulpitrock" width="304" height="228">
-{% endfor %}
+ <form action="/similarSearch/" method="post">
+ {% csrf_token %}
+    {% for row in rows %}
+        <a>
+        <img name="renderedImage" border="0" src={{ row.4 }} id={{ row.0 }} alt={{ row.0 }} "Pulpitrock" width="304" height="228" onclick="setCurrentImage(id)">
+        </a>
+    {% endfor %}
+    <br><br><br>
+     <div align="center">
+         <input align="center" type="submit" value="Similar Search">
+     </div>
+ </form>
 </body>
 </html>
