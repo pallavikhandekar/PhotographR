@@ -160,5 +160,8 @@ def getExifs(tag):
     file.close()
     new_outfile.close()
 
+
 def similarsearch(request):
-    return HttpResponse(request.POST['class'])
+    image = request.POST["photoid"]
+    print image
+    return HttpResponse(image)

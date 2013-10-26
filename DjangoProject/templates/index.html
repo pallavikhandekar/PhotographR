@@ -6,9 +6,8 @@
         function setCurrentImage(imageId)
         {
              var currentImage = document.getElementById(imageId);
-            currentImage.style.borde
-            currentImage.style.borderColor="red"
-            alert(currentImage.style.borderColor)
+             document.getElementsByName("photoid")[0].value = currentImage.id
+            alert(document.getElementsByName("photoid")[0].value)
         }
     </script>
 </head>
@@ -22,6 +21,7 @@
         <img name="renderedImage" border="0" src={{ row.4 }} id={{ row.0 }} alt={{ row.0 }} "Pulpitrock" width="304" height="228" onclick="setCurrentImage(id)">
         </a>
     {% endfor %}
+ <input type="hidden" name="photoid" value="">
     <br><br><br>
      <div align="center">
          <input align="center" type="submit" value="Similar Search">
