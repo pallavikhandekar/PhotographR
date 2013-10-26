@@ -1,11 +1,14 @@
 import urllib2,json, urllib, csv, math, fractions
 
-from xml.dom import minidom
 
-#fo1 = open("new_data.json", "w")
-#fo1.close()
-#fo2 = open("image_data.csv", "w")
-#fo2.close()
+fo1 = open("new_data.json", "w")
+fo1.close()
+fo2 = open("image_data.csv", "w")
+fo2.close()
+fo3 = open("data.json", "w")
+fo3.close()
+fo4 = open("matching_data.csv", "w")
+fo4.close()
 
 
 def getallphotos(tag):
@@ -22,7 +25,7 @@ def getallphotos(tag):
     print req.get_full_url()
 
     try:
-        conn = urllib2.urlopen(url,` urllib.urlencode(data))
+        conn = urllib2.urlopen(url,urllib.urlencode(data))
         try:
             response = conn.read()
         finally:
@@ -57,7 +60,7 @@ def getExifs(tag):
 
     json_stripped_data = json.loads(data)
 #    print(json_stripped_data['photos']['photo'])
-    i = 1000 #NUM of results
+    i = 100 #NUM of results
     new_response='{\"photos\":'
     while i > 0:
         for photo in json_stripped_data['photos']['photo']:
@@ -131,7 +134,7 @@ def getExifs(tag):
     file.close()
     new_outfile.close()
 
-def getSimilarPhotos(photoid, tag):
+def getSimilarPhotos(photoid):
     isoval = ''
     aper = ''
     expo = ''
@@ -152,19 +155,22 @@ def getSimilarPhotos(photoid, tag):
             gotit=''
             if aper != '' and row1[2] != '' and row1[3]!= '' and expo!= '':
                 #print "ceil12="+str(math.ceil(float(row1[2])))+"ceilaper="+str(math.ceil(float(aper)))
-                row_expo = str(row1[3]).split("/")
-                row_expo_numer = int(row_expo[0])
-                row_expo_deno = int(row_expo[1])
-                row_expo_float = fractions.Fraction(row_expo_numer,row_expo_deno)
+                try:
+                    row_expo = str(row1[3]).split("/")
+                    row_expo_numer = int(row_expo[0])
+                    row_expo_deno = int(row_expo[1])
+                    row_expo_float = fractions.Fraction(row_expo_numer,row_expo_deno)
 
-                expo_1 = str(expo).split("/")
-                expo_numer = int(expo_1[0])
-                expo_deno = int(expo_1[1])
-                expo_float = fractions.Fraction(expo_numer,expo_deno)
+                    expo_1 = str(expo).split("/")
+                    expo_numer = int(expo_1[0])
+                    expo_deno = int(expo_1[1])
+                    expo_float = fractions.Fraction(expo_numer,expo_deno)
 
-                if row1[1] == isoval and round(float(row1[2])) == round(float(aper)) and round(row_expo_float) == round(expo_float):
-                    print "----found matching : "+photoid+"="+row1[0]
-                    gotit = 'yes'
+                    if row1[1] == isoval and round(float(row1[2])) == round(float(aper)) and round(row_expo_float) == round(expo_float):
+                        print "----found matching : "+photoid+"="+row1[0]
+                        gotit = 'yes'
+                except Exception as e:
+                    print "exception occurred. No worries"
             elif row1[1] == isoval and row1[2] == aper and row1[3] == expo:
                 print "----found matching : "+photoid+"="+row1[0]
                 gotit = 'yes'
@@ -208,6 +214,6 @@ def getSimilarPhotos(photoid, tag):
 #    #    ph = p
 
 #CALLING HERE
-#getallphotos('golden gate')
-#getExifs('golden gate')
-getSimilarPhotos('10458677563','golden gate')
+getallphotos('Bay Bridge')
+getExifs('Bay Bridge')
+getSimilarPhotos('10480870605')
