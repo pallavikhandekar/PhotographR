@@ -12,3 +12,7 @@ def index(request):
         rows=[row for row in spamreader]
   #  return HttpResponse("Hello, world. You're at the poll index.")
     return  render(request, 'index.html', {"rows": rows})
+
+
+def search(request):
+    return render(request,'SearchImage.html')
