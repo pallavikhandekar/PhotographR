@@ -2,12 +2,24 @@
 <html>
 <head>
     <title>Similar Search</title>
+    <script type="text/javascript">
+        function clickme()
+        {
+            window.history.back()
+        }
+        function setCurrentImage(imageId)
+        {
+             var currentImage = document.getElementById(imageId);
+             document.getElementsByName("photoid")[0].value = currentImage.id
+             document.getElementById("form1").submit()
+        }
+    </script>
 </head>
 <body>
 <h1>You selected </h1>
 <div>
 
-    <table>
+    <table style>
         <tr>
             <td></td></tr>
             <tr><td colspan="7">
@@ -35,5 +47,8 @@
         <img name="renderedImage" border="0" src={{ row.4 }} id={{ row.0 }} alt={{ row.0 }} "Pulpitrock" width="304" height="228" >
         </a>
     {% endfor %}
+<div>
+<button name="Back" onclick="clickme()" style="height: 20px; width: 100px;background-color: lightgray"> Go Back </button>
+</div>
 </body>
 </html>
