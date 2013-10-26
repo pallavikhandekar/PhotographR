@@ -6,4 +6,5 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^FlickerUI/', 'FlickerUI.views.search'),)
+                       url(r'^FlickerUI/', 'FlickerUI.views.search'),
+                       url(r'^FlickerUI/index/', 'FlickerUI.views.index'),)
