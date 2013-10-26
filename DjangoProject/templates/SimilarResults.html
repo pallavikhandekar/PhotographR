@@ -4,20 +4,21 @@
     <title>Similar Search</title>
 </head>
 <body>
-<h1>Similar Searches</h1>
+<h1>You selected </h1>
 <div>
 
     <table>
         <tr>
-            <td>You queried for</td></tr>
-            <tr><td>
-
+            <td></td></tr>
+            <tr><td colspan="7">
+                <img name="renderedImage" border="0" src={{ url}} id={{ id }} alt={{ id }} "Pulpitrock" width="304" height="228" >
             </td>
+            <td></td>
              <td>
-                 <table>
-                     <tr><td>ISO:</td></tr>
-                     <tr><td>Aperture:</td></tr>
-                     <tr><td>Exposure:</td></tr>
+                 <table style="font-size: 28">
+                     <tr><td>ISO:</td><td>{{ iso }}</td></tr>
+                     <tr><td>Aperture:</td><td>{% if aper == None %}NA{% else %}{{ aper }}{% endif %}</td></tr>
+                     <tr><td>Exposure:</td><td>{% if expr == None %}NA{% else %}{{ expr }}{% endif %}</td></tr>
                  </table>
              </td>
         </tr>
@@ -27,6 +28,8 @@
 </div>
 
 <br><br><br>
+<h1>Results for similar settings</h1>
+<br><br>
  {% for row in rows %}
         <a>
         <img name="renderedImage" border="0" src={{ row.4 }} id={{ row.0 }} alt={{ row.0 }} "Pulpitrock" width="304" height="228" >
