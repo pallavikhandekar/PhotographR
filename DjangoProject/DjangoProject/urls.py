@@ -7,4 +7,4 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        (r'^FlickerUI/', 'FlickerUI.views.search'),
-                       (r'^index/$', 'FlickerUI.views.index'),)
+                       (r'^index/$', 'FlickerUI.views.getallphotos'),)

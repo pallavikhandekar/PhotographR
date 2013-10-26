@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6929a162-a271-4567-8ee0-ca40654e71ac" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SearchImage.html" afterPath="$PROJECT_DIR$/templates/SearchImage.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Flickrscraper.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/image_data.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/new_data.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../backend/data.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../backend/new_data.json" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DjangoProject/urls.py" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FlickerUI/views.py" afterPath="$PROJECT_DIR$/FlickerUI/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -37,10 +43,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DjangoProject/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="26" selection-start="214" selection-end="225" vertical-scroll-proportion="0.27088037" vertical-offset="0" max-vertical-offset="443">
+            <state line="9" column="66" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
               <folding />
             </state>
           </provider>
@@ -58,7 +64,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="18" selection-start="386" selection-end="386" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="300">
+            <state line="10" column="32" selection-start="321" selection-end="321" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="285">
               <folding />
             </state>
           </provider>
@@ -67,7 +73,7 @@
       <file leaf-file-name="SearchImage.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/SearchImage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="16" selection-start="162" selection-end="169" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="315">
+            <state line="10" column="42" selection-start="232" selection-end="247" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="315">
               <folding>
                 <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -75,10 +81,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/FlickerUI/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="9" selection-start="211" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="52" max-vertical-offset="495">
+            <state line="101" column="58" selection-start="3081" selection-end="3081" vertical-scroll-proportion="0.54651165" vertical-offset="1280" max-vertical-offset="2520">
               <folding>
                 <element signature="e#64#111#0" expanded="true" />
               </folding>
@@ -107,11 +113,11 @@
       <list>
         <option value="$PROJECT_DIR$/FlickerUI/index.html" />
         <option value="$PROJECT_DIR$/FlickerUI/LoadCSV.py" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/DjangoProject/settings.py" />
-        <option value="$PROJECT_DIR$/FlickerUI/views.py" />
         <option value="$PROJECT_DIR$/templates/SearchImage.html" />
         <option value="$PROJECT_DIR$/DjangoProject/urls.py" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/FlickerUI/views.py" />
       </list>
     </option>
   </component>
@@ -159,48 +165,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="DjangoProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DjangoProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DjangoProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DjangoProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DjangoProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DjangoProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FlickerUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DjangoProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DjangoProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="DjangoProject" />
@@ -595,7 +559,15 @@
       <created>1382778632575</created>
       <updated>1382778632575</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Some Search html changes&#10;Submit">
+      <created>1382781117367</created>
+      <updated>1382781117367</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Some Search html changes&#10;Submit">
+      <created>1382782109532</created>
+      <updated>1382782109532</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -631,7 +603,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Some Search html changes&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some Search html changes&#10;" />
+    <MESSAGE value="Some Search html changes&#10;Submit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some Search html changes&#10;Submit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -697,35 +670,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FlickerUI/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="9" selection-start="211" selection-end="216" vertical-scroll-proportion="0.0" vertical-offset="52" max-vertical-offset="495">
-          <folding>
-            <element signature="e#64#111#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/SearchImage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="16" selection-start="162" selection-end="169" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="315">
+        <state line="10" column="42" selection-start="232" selection-end="247" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="315">
           <folding>
             <element signature="n#style#0;n#input#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/DjangoProject/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="18" selection-start="386" selection-end="386" vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="300">
+        <state line="9" column="66" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DjangoProject/urls.py">
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="26" selection-start="214" selection-end="225" vertical-scroll-proportion="0.27088037" vertical-offset="0" max-vertical-offset="443">
+        <state line="10" column="32" selection-start="321" selection-end="321" vertical-scroll-proportion="-6.25" vertical-offset="0" max-vertical-offset="285">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FlickerUI/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="58" selection-start="3081" selection-end="3081" vertical-scroll-proportion="0.54651165" vertical-offset="1280" max-vertical-offset="2520">
+          <folding>
+            <element signature="e#64#111#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
