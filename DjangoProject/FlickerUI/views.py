@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import csv
 import os
-import urllib2, json, urllib
+import urllib2,json, urllib, csv, math, fractions
 
 
 #def index(request):
@@ -31,7 +31,8 @@ def getallphotos(request):
     fo2.close()
     fo3 = open("data.json", "w")
     fo3.close()
-
+    fo3 = open("matching_data.csv", "w")
+    fo3.close()
 
     url = "http://api.flickr.com/services/rest/?method=flickr.photos.search"
     api_key = '252a5c43c2db9c7ec3b0f0aa31ce821b'
@@ -80,7 +81,6 @@ def getallphotos(request):
 
 
 def getExifs(tag):
-    print "calling getExifs"
     file = open('data.json')
     print type(file)
     data = json.load(file)
@@ -88,9 +88,9 @@ def getExifs(tag):
     file.close()
 
     json_stripped_data = json.loads(data)
-    #    print(json_stripped_data['photos']['photo'])
-    i = 5 #NUM of results
-    new_response = '{\"photos\":'
+#    print(json_stripped_data['photos']['photo'])
+    i = 100 #NUM of results
+    new_response='{\"photos\":'
     while i > 0:
         for photo in json_stripped_data['photos']['photo']:
             print i
@@ -98,11 +98,10 @@ def getExifs(tag):
                 break
             idd = photo['id']
             #http://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-            photo_url = "http://farm" + str(photo['farm']) + ".staticflickr.com/" + str(photo['server']) + "/" + str(
-                idd) + "_" + str(photo['secret']) + ".jpg"
+            photo_url= "http://farm"+str(photo['farm'])+".staticflickr.com/"+str(photo['server'])+"/"+str(idd)+"_"+str(photo['secret'])+".jpg"
             print photo_url
             print idd
-            new_url = "http://api.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=97b05a45e3c038c3d1b520d0ef4d7594&photo_id=" + idd + "&format=json&nojsoncallback=1"
+            new_url = "http://api.flickr.com/services/rest/?method=flickr.photos.getExif&api_key=97b05a45e3c038c3d1b520d0ef4d7594&photo_id="+idd+"&format=json&nojsoncallback=1"
             api_key = '252a5c43c2db9c7ec3b0f0aa31ce821b'
 
             print new_url
@@ -125,13 +124,13 @@ def getExifs(tag):
 
             print new_response
             json_stripped_data_1 = json.loads(new_response)
-            # print json_stripped_data_1['photo']
-            ISOvalue = ''
-            Aperture = ''
-            Exposure = ''
+           # print json_stripped_data_1['photo']
+            ISOvalue=''
+            Aperture=''
+            Exposure=''
             if json_stripped_data_1.get('photo'):
                 for exif in json_stripped_data_1['photo']['exif']:
-                #print exif['tag']
+                        #print exif['tag']
                     if exif['tag'] == "ISO":
                         ISOvalue = exif['raw']['_content']
                         print "ISO is " + ISOvalue
@@ -143,8 +142,11 @@ def getExifs(tag):
                         print "Exposure is " + Exposure
                     if ISOvalue != '' and Aperture != '' and Exposure != '':
                         break
-                combined = idd + "," + ISOvalue + "," + Aperture + "," + Exposure + "," + photo_url
+                combined = idd +","+ISOvalue+","+Aperture+","+Exposure+","+photo_url
                 print combined
+                if "," in ISOvalue:
+                    ISOvalue = ISOvalue.split(",")[0]
+                    print "ISOValue after split : "+ISOvalue
                 with open('image_data.csv', 'a') as csvfile:
                     spamwriter = csv.writer(csvfile)
                     spamwriter.writerow((idd, ISOvalue, Aperture, Exposure, photo_url))
@@ -155,13 +157,68 @@ def getExifs(tag):
     #size = len(new_response)-3
     #new_response = new_response[1:size]+'}'
     with open('new_data.json', 'a') as new_outfile:
-        json.dump(new_response, new_outfile)
+            json.dump(new_response, new_outfile)
+
 
     file.close()
     new_outfile.close()
 
+def getSimilarPhotos(request):
+    photoid = request.POST["photoid"]
+    isoval = ''
+    aper = ''
+    expo = ''
+    with open('image_data.csv', 'rb') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            print ', '.join(row)
+            if row[0] == photoid:
+                isoval = row[1]
+                aper = row[2]
+                expo = row[3]
+                break
+        print isoval+","+aper+","+expo
 
-def similarsearch(request):
-    image = request.POST["photoid"]
-    print image
-    return HttpResponse(image)
+
+        for row1 in spamreader:
+            #print "aper : "+aper+" and row12 = "+row1[2]
+            gotit=''
+            if aper != '' and row1[2] != '' and row1[3]!= '' and expo!= '':
+                #print "ceil12="+str(math.ceil(float(row1[2])))+"ceilaper="+str(math.ceil(float(aper)))
+                try:
+                    row_expo = str(row1[3]).split("/")
+                    row_expo_numer = int(row_expo[0])
+                    row_expo_deno = int(row_expo[1])
+                    row_expo_float = fractions.Fraction(row_expo_numer,row_expo_deno)
+
+                    expo_1 = str(expo).split("/")
+                    expo_numer = int(expo_1[0])
+                    expo_deno = int(expo_1[1])
+                    expo_float = fractions.Fraction(expo_numer,expo_deno)
+
+                    if row1[1] == isoval and round(float(row1[2])) == round(float(aper)) and round(row_expo_float) == round(expo_float):
+                        print "----found matching : "+photoid+"="+row1[0]
+                        gotit = 'yes'
+                except Exception as e:
+                    print "exception occurred. No worries"
+            elif row1[1] == isoval and row1[2] == aper and row1[3] == expo:
+                print "----found matching : "+photoid+"="+row1[0]
+                gotit = 'yes'
+
+            if gotit == 'yes':
+                with open('matching_data.csv', 'a') as new_csvfile:
+                    imgwriter = csv.writer(new_csvfile)
+                    imgwriter.writerow((row1[0], row1[1], row1[2], row1[3], row1[4]))
+                new_csvfile.close()
+    fname = os.path.join(os.path.dirname(__file__), '../matching_data.csv')
+    with open(fname, 'rb') as csvfile:
+        matchreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        matchingrows = [row for row in matchreader]
+    return render(request, 'index.html', {"rows": matchingrows})
+
+#
+#
+#def similarsearch(request):
+#    image = request.POST["photoid"]
+#    print image
+#    return HttpResponse(image)

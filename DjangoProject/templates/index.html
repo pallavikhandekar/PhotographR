@@ -7,7 +7,6 @@
         {
              var currentImage = document.getElementById(imageId);
              document.getElementsByName("photoid")[0].value = currentImage.id
-            alert(document.getElementsByName("photoid")[0].value)
         }
     </script>
 </head>
@@ -22,6 +21,10 @@
         </a>
     {% endfor %}
  <input type="hidden" name="photoid" value="">
+ <input type="hidden" name="url" value="">
+ <input type="hidden" name="iso" value="">
+ <input type="hidden" name="aper" value="">
+ <input type="hidden" name="expo" value="">
     <br><br><br>
      <div align="center">
          <input align="center" type="submit" value="Similar Search">

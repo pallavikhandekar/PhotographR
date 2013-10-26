@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Similar Search</title>
+</head>
+<body>
+<h1>Similar Searches</h1>
+<div>
+
+    <table>
+        <tr>
+            <td>You queried for</td></tr>
+            <tr><td>
+
+            </td>
+             <td>
+                 <table>
+                     <tr><td>ISO:</td></tr>
+                     <tr><td>Aperture:</td></tr>
+                     <tr><td>Exposure:</td></tr>
+                 </table>
+             </td>
+        </tr>
+
+    </table>
+
+</div>
+
+<br><br><br>
+ {% for row in rows %}
+        <a>
+        <img name="renderedImage" border="0" src={{ row.4 }} id={{ row.0 }} alt={{ row.0 }} "Pulpitrock" width="304" height="228" >
+        </a>
+    {% endfor %}
+</body>
+</html>
