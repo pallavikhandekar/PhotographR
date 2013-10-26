@@ -178,13 +178,15 @@ def getSimilarPhotos(request):
     aper = ''
     expo = ''
     srcphotourl = ''
-
+    fo3 = open("matching_data.csv", "w")
+    fo3.close()
 
     fname1 = os.path.join(os.path.dirname(__file__), '../image_data.csv')
     with open(fname1, 'rb') as csvload1:
         spamreader1 = csv.reader(csvload1, delimiter=',', quotechar='|')
-        for row in spamreader1:
-            print ', '.join(row)
+        readerrows = [row for row in spamreader1]
+        for row in readerrows:
+            #print ', '.join(row)
             print photoid + "," + row[0]
             if row[0] == photoid:
                 print("aaya")
@@ -195,8 +197,9 @@ def getSimilarPhotos(request):
                 break
 
 
-        for row1 in spamreader1:
-            #print "aper : "+aper+" and row12 = "+row1[2]
+        for row1 in readerrows:
+           # print "aper : "+aper+" and row12 = "+row1[2]
+            print "PHOTOID::" + row1[0]
             gotit = ''
             if aper != '' and row1[2] != '' and row1[3] != '' and expo != '':
                 #print "ceil12="+str(math.ceil(float(row1[2])))+"ceilaper="+str(math.ceil(float(aper)))
@@ -211,17 +214,17 @@ def getSimilarPhotos(request):
                     expo_deno = int(expo_1[1])
                     expo_float = fractions.Fraction(expo_numer, expo_deno)
 
-                    if row1[1] == isoval and round(float(row1[2])) == round(float(aper)) and round(
+                    if str(row1[1]) == str(isoval) and round(float(row1[2])) == round(float(aper)) and round(
                             row_expo_float) == round(expo_float):
-                        print "----found matching : " + photoid + "=" + row1[0]
+                        print "----found matching using rounding : " + photoid + "=" + row1[0]
                         gotit = 'yes'
                 except Exception as e:
                     print "exception occurred. No worries"
-            elif row1[1] == isoval and row1[2] == aper and row1[3] == expo:
+            elif str(row1[1]) == str(isoval) and row1[2] == aper and row1[3] == expo:
                 print "----found matching : " + photoid + "=" + row1[0]
                 gotit = 'yes'
 
-            if gotit == 'yes':
+            if gotit == 'yes' and row1[0]!= photoid:
                 with open('matching_data.csv', 'a') as new_csvfile:
                     imgwriter = csv.writer(new_csvfile)
                     imgwriter.writerow((row1[0], row1[1], row1[2], row1[3], row1[4]))
@@ -231,7 +234,7 @@ def getSimilarPhotos(request):
         matchreader = csv.reader(csvfile, delimiter=',', quotechar='|')
         matchingrows = [row for row in matchreader]
 
-       # print isoval + '**' + aper + "**" + expo + "**" + photoid
+        print isoval + '**' + aper + "**" + expo + "**" + photoid
     return render(request, 'SimilarResults.html', {"rows": matchingrows, "iso": isoval, "aper":aper, "expo":expo, "id":photoid,"url":srcphotourl})
 
     #
