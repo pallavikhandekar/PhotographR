@@ -12,6 +12,11 @@
 </head>
 <body>
 <h2 align="center">Search Results</h2>
+<div>
+<button name="Back" onclick="clickme()" style="height: 20px; width: 100px;background-color: lightgray"> Go Back </button>
+</div>
+<br>
+<div>
 <!--<img border="0" src="http://upload.wikimedia.org/wikipedia/commons/e/e3/CentaureaCyanus-bloem-kl.jpg" alt="Pulpit rock" width="304" height="228">-->
  <form action="/similarSearch/" method="post">
  {% csrf_token %}
@@ -30,5 +35,9 @@
          <input align="center" type="submit" value="Similar Search">
      </div>
  </form>
+<div>
+<button name="Back" onclick="clickme()" style="height: 20px; width: 100px;background-color: lightgray"> Go Back </button>
+</div>
+</div>
 </body>
 </html>
